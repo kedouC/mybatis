@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.test.lwk.dao.NewsDao" >
+
+  <!--  定义List<user>-->
+  <resultMap id="userList" type="com.test.lwk.domain.News">
+  	<id column="id" property="id"/>
+  	<result column="title" property="title"/>
+  	<result column="author" property="author"/>
+  	<result column="publish_time" property="publishTime"/>
+  	<result column="describe" property="describe"/>
+  	<result column="img_url" property="imgUrl"/>
+  	<result column="content" property="content"/>
+  	
+  </resultMap>
+  
+  <!-- 根据id查询 -->
+  <select id="getNewById" resultType="com.test.lwk.domain.News" parameterType="java.lang.String">
+  	select * from news where id= #{id}
+  </select>
+  
+ 
+  <!-- 查询所有 -->
+  <select id="getAllNews" resultMap="userList">
+  	select * from news
+  </select>
+  
+  <insert id="addNews" parameterType="com.test.lwk.domain.News">
+  	insert into news values(#{id},#{title},#{author},
+  	#{content},#{publishTime},#{describe},#{imgUrl})
+  </insert>
+</mapper>
